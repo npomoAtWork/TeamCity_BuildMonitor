@@ -66,6 +66,9 @@ namespace BuildMonitor.Helpers
 
                 build.Branch = (buildStatusJson != null) ? (buildStatusJson.branchName ?? "default") : "unknown";
                 build.Status = GetBuildStatusForRunningBuild(build.Id);
+                build.buildText = (buildStatusJson != null && buildStatusJson.comment != null) 
+                    ? (buildStatusJson.comment.text.ToString().Replace("Triggering Tests from Octopus Deploy of the ", "Ran Against ")) : "";
+                build.lastUser = GetLastChangesCommitter();
 
 				if (build.Status == BuildStatus.Running)
 				{
@@ -149,5 +152,24 @@ namespace BuildMonitor.Helpers
 				return "Unknown";
 			}
 		}
+
+        private string GetLastChangesCommitter()
+        {
+            try
+            {
+                if (buildStatusJson != null && (string)buildStatusJson.lastChanges.change[0].username != null)
+                {
+                    return buildStatusJson.lastChanges.change[0].username.ToString().Replace("@frontlinetechnologies.com", "");
+                }
+                else 
+                {
+                    return "No Changes";
+                }
+            }
+            catch
+            {
+                return "Unknown";
+            }
+        }
 	}
 }

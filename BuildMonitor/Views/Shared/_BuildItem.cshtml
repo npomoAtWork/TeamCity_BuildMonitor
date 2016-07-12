@@ -4,9 +4,10 @@
 	<div class="well">
 		<h4 class="buildTitle text-cutoff">@Model.Name</h4>
 		<h2 class="status-@Model.Status text-cutoff">@Model.StatusText</h2>
-		<p class="buildInfo text-cutoff">@Model.StatusDescription</p>
+	    <p class="buildInfo text-cutoff">@Model.StatusDescription</p>
+	    <p class="buildDescription">@Model.buildText</p>
 		<p class="buildInfoBranch text-cutoff">
-			Branch <span class="buildInfoHighlight">@Model.Branch</span>
+		    Branch: <span class="buildInfoHighlight">@Model.Branch&nbsp;&nbsp;&nbsp;</span>Committer: <span class="buildInfoHighlight">@Model.lastUser</span>
 			@if (!string.IsNullOrWhiteSpace(Model.Progress))
 			{
 				<span> ▪ job <span class="buildInfoProgressHighlight"> @Model.Progress </span>done</span>
@@ -16,6 +17,6 @@
 				<span> ▪ </span><span class="buildInfoProgressHighlight">queued</span>
 			}
 		</p>
-		<p class="buildInfo text-cutoff">Last updated by <span class="buildInfoHighlight">@Model.UpdatedBy</span> @Model.LastRunText</p>
+		<p class="buildInfo text-cutoff">Last updated @Model.LastRunText</p>
 	</div>
 </div>

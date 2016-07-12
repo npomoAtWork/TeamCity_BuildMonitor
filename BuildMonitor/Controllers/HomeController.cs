@@ -13,8 +13,8 @@ namespace BuildMonitor.Controllers
 
 		public HomeController()
 		{
-			modelHandler = new DefaultBuildMonitorModelHandler();
-			//modelHandler = new CustomBuildMonitorModelHandler();
+			//modelHandler = new DefaultBuildMonitorModelHandler();
+			modelHandler = new CustomBuildMonitorModelHandler();
 
 			RequestHelper.Username = ConfigurationManager.AppSettings["teamcity_username"];
 			RequestHelper.Password = ConfigurationManager.AppSettings["teamcity_password"];
